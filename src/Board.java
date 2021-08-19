@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -103,5 +104,23 @@ public class Board {
     
     boolean isAllowed(int x, int y) {
         return x >= 0 && x < w && y >= 0 && y < h && !walls[y][x] && !occupied.contains(new Point(x, y));
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        
+        Board board = (Board) o;
+        
+        if (!occupied.equals(board.occupied)) return false;
+        return head.equals(board.head);
+    }
+    
+    @Override
+    public int hashCode() {
+        int result = occupied.hashCode();
+        result = 31 * result + head.hashCode();
+        return result;
     }
 }
